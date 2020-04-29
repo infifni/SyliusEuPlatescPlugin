@@ -1,0 +1,4 @@
+suites:
+    main:
+        namespace: Infifni\SyliusEuPlatescPlugin
+        psr4_prefix: Infifni\SyliusEuPlatescPlugin

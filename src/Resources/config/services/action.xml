@@ -1,0 +1,26 @@
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <defaults public="true" autoconfigure="false" autowire="false"/>
+
+        <service id="infifni.sylius_euplatesc_plugin.action.capture" class="Infifni\SyliusEuPlatescPlugin\Action\CaptureAction">
+            <tag name="payum.action" factory="euplatesc" alias="payum.action.capture"/>
+        </service>
+
+        <service id="infifni.sylius_euplatesc_plugin.action.notify" class="Infifni\SyliusEuPlatescPlugin\Action\NotifyAction">
+            <argument type="service" id="infifni.sylius_euplatesc_plugin.bridge.euplatesc"/>
+            <tag name="payum.action" factory="euplatesc" alias="payum.action.notify"/>
+        </service>
+
+        <service id="infifni.sylius_euplatesc_plugin.action.status" class="Infifni\SyliusEuPlatescPlugin\Action\StatusAction">
+            <tag name="payum.action" factory="euplatesc" alias="payum.action.status"/>
+        </service>
+
+        <service id="infifni.sylius_euplatesc_plugin.action.convert_payment" class="Infifni\SyliusEuPlatescPlugin\Action\ConvertPaymentAction">
+            <argument type="service" id="infifni.sylius_euplatesc_plugin.bridge.euplatesc"/>
+            <tag name="payum.action" factory="euplatesc" alias="payum.action.convert_payment"/>
+        </service>
+
+    </services>
+</container>

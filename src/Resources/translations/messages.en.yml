@@ -1,0 +1,8 @@
+infifni:
+    sylius_euplatesc_plugin:
+        environment: Environment
+        secure: Production
+        sandbox: Test
+        merchant_key: Key provided by EuPlatesc (for Test environment do not remove the default value)
+        merchant_id: Merchant identifier provided by EuPlatesc (for Test environment do not remove the default value)
+        gateway_label: EuPlatesc

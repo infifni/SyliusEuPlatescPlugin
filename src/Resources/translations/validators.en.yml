@@ -1,0 +1,7 @@
+infifni:
+    sylius_euplatesc_plugin:
+        gateway_configuration:
+            merchant_id:
+                not_blank: Merchant identifier from EuPlatesc has not been provided.
+            merchant_key:
+                not_blank: Key from EuPlatesc has not been provided.

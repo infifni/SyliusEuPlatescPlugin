@@ -1,0 +1,7 @@
+infifni:
+    sylius_euplatesc_plugin:
+        gateway_configuration:
+            merchant_id:
+                not_blank: Identificatorul pentru comerciant de la EuPlătesc nu a fost completat.
+            merchant_key:
+                not_blank: Cheia de la EuPlătesc nu a fost completată.

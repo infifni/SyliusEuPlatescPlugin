@@ -1,0 +1,5 @@
+infifni_sylius_euplatesc_plugin_notify_action:
+    path: /payment/euplatesc/notify
+    methods: ['POST']
+    defaults:
+        _controller: infifni.sylius_euplatesc_plugin.controller.notify:doAction
