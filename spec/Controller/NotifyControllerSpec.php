@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace spec\Infifni\SyliusEuPlatescPlugin\Controller;
 
+use Infifni\SyliusEuPlatescPlugin\Bridge\EuPlatescBridgeInterface;
 use Infifni\SyliusEuPlatescPlugin\Controller\NotifyController;
 use Payum\Core\GatewayInterface;
 use Payum\Core\Payum;
@@ -21,12 +22,18 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class NotifyControllerSpec extends ObjectBehavior
 {
-    function let(Payum $payum, PaymentRepositoryInterface $paymentRepository): void
-    {
-        $this->beConstructedWith($payum, $paymentRepository);
+    function let(
+        Payum $payum,
+        PaymentRepositoryInterface $paymentRepository,
+        TranslatorInterface $translator,
+        RouterInterface $router
+    ): void {
+        $this->beConstructedWith($payum, $paymentRepository, $translator, $router);
     }
 
     function it_is_initializable(): void
@@ -46,7 +53,8 @@ final class NotifyControllerSpec extends ObjectBehavior
         $request = new Request([], ['invoice_id' => 1]);
 
         $payment->getDetails()->willReturn([
-            'ExtraData' => 'test'
+            'ExtraData' => 'test',
+            'euplatesc_status' => EuPlatescBridgeInterface::CREATED_STATUS
         ]);
 
         $paymentRepository->findOneBy(['id' => 1])->willReturn($payment);

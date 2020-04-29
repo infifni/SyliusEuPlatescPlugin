@@ -6,3 +6,7 @@ infifni:
         merchant_key: Key provided by EuPlatesc (for Test environment do not remove the default value)
         merchant_id: Merchant identifier provided by EuPlatesc (for Test environment do not remove the default value)
         gateway_label: EuPlatesc
+ui:
+    notify:
+        transaction_successful: Transaction approved. Get back to your account <a href="%url%">here</a>.
+        transaction_failed: Transaction failed. Get back to your account <a href="%url%">here</a>.

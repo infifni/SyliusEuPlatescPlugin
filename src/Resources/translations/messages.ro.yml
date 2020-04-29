@@ -6,3 +6,7 @@ infifni:
         merchant_key: Cheie primită de la EuPlătesc (pentru mediu Test nu șterge valoarea existentă)
         merchant_id: Identificator comerciant primit de la EuPlătesc (pentru mediu Test nu șterge valoarea existentă)
         gateway_label: EuPlătesc
+ui:
+    notify:
+        transaction_successful: Tranzacția a fost acceptată. Întoarce-te la contul tău <a href="%url%">aici</a>.
+        transaction_failed: Tranzacția a eșuat. Întoarce-te la contul tău <a href="%url%">aici</a>.

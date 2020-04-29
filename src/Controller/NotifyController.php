@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Infifni\SyliusEuPlatescPlugin\Controller;
 
+use Infifni\SyliusEuPlatescPlugin\Bridge\EuPlatescBridgeInterface;
 use Payum\Core\Exception\LogicException;
 use Payum\Core\Payum;
 use Payum\Core\Reply\ReplyInterface;
@@ -21,6 +22,8 @@ use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class NotifyController
 {
@@ -35,13 +38,31 @@ final class NotifyController
     private $paymentRepository;
 
     /**
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    /**
+     * @var RouterInterface
+     */
+    private $router;
+
+    /**
      * @param Payum $payum
      * @param PaymentRepositoryInterface $paymentRepository
+     * @param TranslatorInterface $translator
+     * @param RouterInterface $router
      */
-    public function __construct(Payum $payum, PaymentRepositoryInterface $paymentRepository)
-    {
+    public function __construct(
+        Payum $payum,
+        PaymentRepositoryInterface $paymentRepository,
+        TranslatorInterface $translator,
+        RouterInterface $router
+    ) {
         $this->payum = $payum;
         $this->paymentRepository = $paymentRepository;
+        $this->translator = $translator;
+        $this->router = $router;
     }
 
     /**
@@ -74,6 +95,21 @@ final class NotifyController
 
         $gateway->execute(new Notify($token));
 
-        return new Response('[accepted]');
+        /** @var PaymentInterface $payment */
+        $payment = $this->paymentRepository->findOneBy(['id' => $paymentId]);
+        $paymentDetails = $payment->getDetails();
+        if (EuPlatescBridgeInterface::COMPLETED_STATUS === $paymentDetails['euplatesc_status']) {
+            return new Response(
+                $this->translator->trans('ui.notify.transaction_successful', [
+                    '%url%' => $this->router->generate('sylius_shop_account_dashboard')
+                ])
+            );
+        }
+
+        return new Response(
+            $this->translator->trans('ui.notify.transaction_failed', [
+                '%url%' => $this->router->generate('sylius_shop_account_dashboard')
+            ])
+        );
     }
 }
