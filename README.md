@@ -3,6 +3,8 @@
 </a>
 <h1>
     Sylius EuPlătesc PLUGIN
+    <br />
+    License MIT
 </h1>
 
 <p>
