@@ -26,12 +26,10 @@ return [
 ];
 ```
 
-3. Import routes in `app/config/routing.yml`:
+3. Import routes in `config/routes/infifni_sylius_euplatesc_plugin.yml`:
 
 ```yaml
-
-# app/config/routing.yml
-# other lines
+# config/routes/infifni_sylius_euplatesc_plugin.yml
 infifni_sylius_euplatesc_plugin:
     resource: "@InfifniSyliusEuPlatescPlugin/Resources/config/routing.yml"
 ```
