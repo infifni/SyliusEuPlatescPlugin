@@ -18,13 +18,13 @@ Also the Sylius version must be at least 1.6.
 1. Run `composer require infifni/euplatesc-plugin`.
 
 2. Add plugin dependencies to your `config/bundles.php` file:
-```php
-// config/bundles.php
-return [
-    // other lines
-    new Infifni\SyliusEuPlatescPlugin\InfifniSyliusEuPlatescPlugin(),
-];
-```
+    ```php
+    // config/bundles.php
+    return [
+        // other lines
+        new Infifni\SyliusEuPlatescPlugin\InfifniSyliusEuPlatescPlugin(),
+    ];
+    ```
 
 3. Import routes in `config/routes/infifni_sylius_euplatesc_plugin.yml`:
 
